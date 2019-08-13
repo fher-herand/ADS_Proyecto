@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="./layout.css" rel="stylesheet" type="text/css" media="all">
+    <title>Title</title>
+</head>
+
+<body onload="init()">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <!--img src="{% static 'images/logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt=""-->
+            Título
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../pages/student.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <button class="btn btn-outline-danger" onclick="logout()">Cerrar sesión</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 id="username"></h2>
+        <div class="row">
+            <div class="col-md-12">
+                <p id="salidaFoto"></p>    
+                <input type="file" id="filesFoto" />
+                    <button class="button" style="vertical-align:middle" onclick="UploadPicture()"><span> Subir Foto
+                        </span></button>
+                        <img src="" width="100" height="100" id="fotona">
+                        <script>document.getElementById("fotona").src = `file:///C:/Program%20Files%20(x86)/IIS/Maestro/${sessionStorage.getItem('id')}.jpg`</script>
+                <br />
+                <br />
+                <nav>
+                    <div class="nav nav-tabs" name="tab" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-posts-tab" data-toggle="tab" href="#nav-posts"
+                            role="tab" aria-controls="nav-posts" aria-selected="true" onclick="showPosts()">Mis
+                            Publicaciones</a>
+                        <a class="nav-item nav-link" id="nav-create-posts-tab" data-toggle="tab"
+                            href="#nav-create-posts" role="tab" aria-controls="nav-create-posts" aria-selected="false"
+                            onclick="createPosts()">Crear
+                            Publicacion</a>
+                        <a class="nav-item nav-link" id="nav-create-files-tab" data-toggle="tab"
+                            href="#nav-create-files" role="tab" aria-controls="nav-create-files" aria-selected="false"
+                            onclick="createFiles()">Subir Material de
+                            apoyo</a>
+                        <a class="nav-item nav-link" id="nav-files-tab" data-toggle="tab" href="#nav-files" role="tab"
+                            aria-controls="nav-files" aria-selected="false" onclick="showFiles()">Mi Material de
+                            apoyo</a>
+                        <a class="nav-item nav-link" id="nav-create-activities-tab" data-toggle="tab"
+                            href="#nav-create-activities" role="tab" aria-controls="nav-create-activities"
+                            aria-selected="false" on onclick="createActivities()">Crear Actividad</a>
+                        <a class="nav-item nav-link" id="nav-activities-tab" data-toggle="tab" href="#nav-activities"
+                            role="tab" aria-controls="nav-activities" aria-selected="false" on
+                            onclick="showActivities()">Mis Actividades</a>
+                        <a class="nav-item nav-link" id="nav-student-tab" data-toggle="tab" href="#nav-notes" role="tab"
+                            aria-controls="nav-notes" aria-selected="false" onclick="scoreNotes()">Calificacion</a>
+                        <a class="nav-item nav-link" id="nav-courseList-tab" data-toggle="tab" href="#nav-courseList"
+                            role="tab" aria-controls="nav-courseList" aria-selected="false"
+                            onclick="showScore()">Notas</a>
+                        <a class="nav-item nav-link" id="nav-student-tab" data-toggle="tab" href="#nav-student"
+                            role="tab" aria-controls="nav-student" aria-selected="false"
+                            onclick="showStudentOptions()">Alumnos</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <!--PUBLICACIONES-->
+                    <div class="tab-pane fade show active" id="nav-posts" role="tabpanel"
+                        aria-labelledby="nav-posts-tab">
+                        <div class="accordion" id="accordionPosts">
+                        </div>
+                    </div>
+                    <!--CREAR PUBLICACIONES-->
+                    <div class="tab-pane fade" id="nav-create-posts" role="tabpanel"
+                        aria-labelledby="nav-create-posts-tab">
+                        <div class="accordion" id="accordionCreatePosts">
+                        </div>
+                    </div>
+                    <!--CREAR MATERIAL DE APOYO-->
+                    <div class="tab-pane fade" id="nav-create-files" role="tabpanel"
+                        aria-labelledby="nav-create-files-tab">
+                        <div class="accordion" id="accordionCreateFiles">
+                        </div>
+                    </div>
+                    <!--MATERIAL DE APOYO-->
+                    <div class="tab-pane fade" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
+                        <div class="accordion" id="accordionFiles">
+                        </div>
+                    </div>
+                    <!--CREAR ACTIVIDADES-->
+                    <div class="tab-pane fade" id="nav-create-activities" role="tabpanel"
+                        aria-labelledby="nav-create-activities-tab">
+                        <div class="accordion" id="accordionCreateActivities">
+                        </div>
+                    </div>
+                    <!--ACTIVIDADES-->
+                    <div class="tab-pane fade" id="nav-activities" role="tabpanel" aria-labelledby="nav-activities-tab">
+                        <div class="accordion" id="accordionActivities">
+                        </div>
+                    </div>
+                    <!--CALIFICACION-->
+                    <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-note-tab">
+                        <div class="accordion" id="accordionNotes">
+                        </div>
+                    </div>
+                    <!--NOTAS-->
+                    <div class="tab-pane fade" id="nav-courseList" role="tabpanel" aria-labelledby="nav-courseList-tab">
+                        <div class="accordion" id="courseList">
+                        </div>
+                    </div>
+                    <!--ALUMNOS-->
+                    <div class="tab-pane fade" id="nav-student" role="tabpanel" aria-labelledby="nav-student-tab">
+                        <div class="accordion" id="accordionStudent">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+
+
+    <script>
+        
+        function init() {
+            if (sessionStorage.getItem('rol') != 2) {
+                alert('Tu sesión ha caducado');
+                //location.href = "./login.html"
+            } else {
+                document.getElementById("username").innerHTML = 'Bienvenido ' + sessionStorage.getItem("usuario");
+            }
+            showPosts();
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            location.href = "../pages/login.html"
+        }
+
+    </script>
+</body>
+
+</html>
