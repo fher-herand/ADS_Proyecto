@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="./layout.css" rel="stylesheet" type="text/css" media="all">
+    <title>Title</title>
+</head>
+
+<body onload="init()">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <!--img src="{% static 'images/logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt=""-->
+            Título
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../pages/student.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <label id="username"></label>
+            <button class="btn btn-outline-danger" onclick="logout()">Cerrar sesión</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <br />
+                <br />
+                <nav>
+                    <div class="nav nav-tabs" name="tab" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-create-posts-tab" data-toggle="tab"
+                            href="#nav-create-posts" role="tab" aria-controls="nav-create-posts" aria-selected="true"
+                            onclick="">Crear
+                            Publicacion</a>
+                        <a class="nav-item nav-link active" id="nav-posts-tab" data-toggle="tab" href="#nav-posts"
+                            role="tab" aria-controls="nav-posts" aria-selected="false" onclick="">Mis
+                            Publicaciones</a>
+                        <a class="nav-item nav-link" id="nav-create-files-tab" data-toggle="tab"
+                            href="#nav-create-files" role="tab" aria-controls="nav-files" aria-selected="false"
+                            onclick="">Subir Material de
+                            apoyo</a>
+                        <a class="nav-item nav-link" id="nav-files-tab" data-toggle="tab" href="#nav-files" role="tab"
+                            aria-controls="nav-files" aria-selected="false" onclick="">Mi Material de
+                            apoyo</a>
+                        <a class="nav-item nav-link" id="nav-create-activities-tab" data-toggle="tab"
+                            href="#nav-create-activities" role="tab" aria-controls="nav-create-activities"
+                            aria-selected="false" on onclick="createActivities()">Crear Actividad</a>
+                        <a class="nav-item nav-link" id="nav-activities-tab" data-toggle="tab" href="#nav-activities"
+                            role="tab" aria-controls="nav-activities" aria-selected="false" on
+                            onclick="#">Mis Actividades</a>
+                        <a class="nav-item nav-link" id="nav-student-tab" data-toggle="tab" href="#nav-student"
+                            role="tab" aria-controls="nav-student" aria-selected="false"
+                            onclick="#">Alumnos</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <!--CREAR PUBLICACIONES-->
+                    <div class="tab-pane fade show active" id="nav-create-posts" role="tabpanel"
+                        aria-labelledby="nav-create-posts-tab">
+                        <div class="accordion" id="accordionCreatePosts">
+                        </div>
+                    </div>
+                    <!--PUBLICACIONES-->
+                    <div class="tab-pane fade show active" id="nav-posts" role="tabpanel"
+                        aria-labelledby="nav-posts-tab">
+                        <div class="accordion" id="accordionPosts">
+                        </div>
+                    </div>
+                    <!--CREAR MATERIAL DE APOYO-->
+                    <div class="tab-pane fade" id="nav-create-files" role="tabpanel"
+                        aria-labelledby="nav-create-files-tab">
+                        <div class="accordion" id="accordionCreateFiles">
+                        </div>
+                    </div>
+                    <!--MATERIAL DE APOYO-->
+                    <div class="tab-pane fade" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
+                        <div class="accordion" id="accordionFiles">
+                        </div>
+                    </div>
+                    <!--CREAR ACTIVIDADES-->
+                    <div class="tab-pane fade" id="nav-create-activities" role="tabpanel"
+                        aria-labelledby="nav-create-activities-tab">
+                        <div class="accordion" id="accordionCreateActivities">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <script>
+        function init() {
+            document.getElementById("bienvenida").innerHTML = 'Bienvenido ' + sessionStorage.getItem('usuario');
+                document.getElementById("username").innerHTML = sessionStorage.getItem("usuario");
+            showPosts();
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            location.href = "../pages/login.html"
+        }
+
+        function createActivities() {
+            let html = `<h3>Crear Actividad</h3>
+                <label for="ftitle">Titulo</label>
+                <input type="text" id="ftitle" name="name" placeholder="Ingresa el nombre">
+
+                <label for="fdesc">Descripcion</label>
+                <input type="number" id="fdesc" name="tel" placeholder="Ingresa el telefono">
+
+                <label for="fpubli">Fecha Publicacion</label>
+                <input type="datetime-local" id="fpubli" name="tel" placeholder="Ingresa el telefono del tutor">
+
+                <label for="fvalor">Valor</label>
+                <input type="number" id="fvalor" name="dir" placeholder="Ingresa el direccion">
+
+                <label for="fentrega">Fecha Entrega</label>
+                <input type="datetime-local" id="fentrega" name="cor" placeholder="Ingresa el correo...">
+
+                <label for="listaActividad">Seleccione el tipo de actividad...</label>
+                <select id="listaActividad" name="alumnos"></select>
+
+                <label for="listaGrado">Seleccione a que grado va destinado...</label>
+                <select id="listaGrado" name="alumnos"></select>`;
+
+            var url = "http://localhost:51161/api/TipoActividad";
+            $.get(url, function (data, status) {
+                var listaActividades = document.getElementById("listaActividad");
+                for (x in data) {
+                    listaActividades.options[listaActividades.options.length] = new Option(data[x].nombre, data[x].id_tipo);
+                }
+            });
+            var url2 = "http://localhost:51161/api/GradoMateria/"+sessionStorage.getItem('id');
+            $.get(url2, function (data, status) {
+                var listaGrados = document.getElementById("listaGrado");
+                for (x in data) {
+                    listaGrados.options[listaGrados.options.length] = new Option(data[x].materia + " - "+data[x].Grado + " " + data[x].carrera, data[x].id_gradomateria);
+                }
+            });
+            document.getElementById("accordionPosts").innerHTML = html;
+        }
+
+
+    </script>
+</body>
+
+</html>
