@@ -100,34 +100,3 @@ function optionSelected(event, idOption, idQuestion){
         }).selected = false;
     }
 }
-
-function finishTest(idTest) {
-    let msg = "";
-    options.forEach(function (item) {
-        msg += `Q${item.idQuestion}:O${item.idOption}->${item.selected}\n`;
-    });
-    alert(msg);
-}
-
-function loadPager(){
-    let card1 = {
-        id_Publicacion:1,
-        titulo:"Titulo publicación 1",
-        fh_publicacion:new Date("2019-3-15"),
-    };
-    let card2 = {
-        id_Actividad:2,
-        titulo:"Titulo publicación 2",
-        fh_publicacion:new Date("2019-3-1"),
-    };
-    let cards = new Array(card1, card2);
-
-    let html = "";
-    cards.forEach(function (card) {
-        html += `<li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>`;
-    });
-
-    document.getElementById("pager").innerText = html;
-}
