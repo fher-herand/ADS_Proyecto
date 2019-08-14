@@ -61,36 +61,12 @@
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
-                    <!--CREAR PUBLICACIONES-->
-                    <div class="tab-pane fade show active" id="nav-create-posts" role="tabpanel"
-                        aria-labelledby="nav-create-posts-tab">
-                        <div class="accordion" id="accordionCreatePosts">
-                        </div>
-                    </div>
-                    <!--PUBLICACIONES-->
-                    <div class="tab-pane fade show active" id="nav-posts" role="tabpanel"
-                        aria-labelledby="nav-posts-tab">
-                        <div class="accordion" id="accordionPosts">
-                        </div>
-                    </div>
-                    <!--CREAR MATERIAL DE APOYO-->
-                    <div class="tab-pane fade" id="nav-create-files" role="tabpanel"
-                        aria-labelledby="nav-create-files-tab">
-                        <div class="accordion" id="accordionCreateFiles">
-                        </div>
-                    </div>
-                    <!--MATERIAL DE APOYO-->
-                    <div class="tab-pane fade" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
-                        <div class="accordion" id="accordionFiles">
-                        </div>
-                    </div>
                     <!--CREAR ACTIVIDADES-->
                     <div class="tab-pane fade" id="nav-create-activities" role="tabpanel"
                         aria-labelledby="nav-create-activities-tab">
                         <div class="accordion" id="accordionCreateActivities">
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -108,61 +84,5 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-
-    <script>
-        function init() {
-            document.getElementById("bienvenida").innerHTML = 'Bienvenido ' + sessionStorage.getItem('usuario');
-                document.getElementById("username").innerHTML = sessionStorage.getItem("usuario");
-            showPosts();
-        }
-
-        function logout() {
-            sessionStorage.clear();
-            location.href = "../pages/login.html"
-        }
-
-        function createActivities() {
-            let html = `<h3>Crear Actividad</h3>
-                <label for="ftitle">Titulo</label>
-                <input type="text" id="ftitle" name="name" placeholder="Ingresa el nombre">
-
-                <label for="fdesc">Descripcion</label>
-                <input type="number" id="fdesc" name="tel" placeholder="Ingresa el telefono">
-
-                <label for="fpubli">Fecha Publicacion</label>
-                <input type="datetime-local" id="fpubli" name="tel" placeholder="Ingresa el telefono del tutor">
-
-                <label for="fvalor">Valor</label>
-                <input type="number" id="fvalor" name="dir" placeholder="Ingresa el direccion">
-
-                <label for="fentrega">Fecha Entrega</label>
-                <input type="datetime-local" id="fentrega" name="cor" placeholder="Ingresa el correo...">
-
-                <label for="listaActividad">Seleccione el tipo de actividad...</label>
-                <select id="listaActividad" name="alumnos"></select>
-
-                <label for="listaGrado">Seleccione a que grado va destinado...</label>
-                <select id="listaGrado" name="alumnos"></select>`;
-
-            var url = "http://localhost:51161/api/TipoActividad";
-            $.get(url, function (data, status) {
-                var listaActividades = document.getElementById("listaActividad");
-                for (x in data) {
-                    listaActividades.options[listaActividades.options.length] = new Option(data[x].nombre, data[x].id_tipo);
-                }
-            });
-            var url2 = "http://localhost:51161/api/GradoMateria/"+sessionStorage.getItem('id');
-            $.get(url2, function (data, status) {
-                var listaGrados = document.getElementById("listaGrado");
-                for (x in data) {
-                    listaGrados.options[listaGrados.options.length] = new Option(data[x].materia + " - "+data[x].Grado + " " + data[x].carrera, data[x].id_gradomateria);
-                }
-            });
-            document.getElementById("accordionPosts").innerHTML = html;
-        }
-
-
-    </script>
 </body>
-
 </html>
