@@ -2,11 +2,14 @@ var options = [];
 
 function init(){
     if(sessionStorage.getItem('rol') != 1){
+        //alert('Tu sesión ha caducado');
+        //location.href = "login.html"
+        document.getElementById("username").innerHTML = "Sin sesión";
     }else{
-
+        document.getElementById("username").innerHTML = sessionStorage.getItem("usuario");
     }
     params = new URLSearchParams(location.search);
-    loadTest(params.get("id"), params.get("title"));
+    loadTest(params.get("id"), params.get("title") || "Título Exámen");
 }
 
 function logout() {
@@ -28,7 +31,7 @@ function loadTest(idTest, titleTest){
     let html = "";
     html += `<h2 align="center">${titleTest}</h2>`;
     cards.forEach(function (card) {
-        html += `<div class="card-header">
+        html += `<div class="card-header bg-dark text-light">
                     ID: ${card.id_pregunta}
                 </div>
                 <div class="card-body">
