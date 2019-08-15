@@ -3,7 +3,7 @@ var options = [];
 function init(){
     if(sessionStorage.getItem('rol') != 1){
         //alert('Tu sesión ha caducado');
-        //location.href = "login.html"
+        //location.href = "../html/login.html"
         document.getElementById("username").innerHTML = "Sin sesión";
     }else{
         document.getElementById("username").innerHTML = sessionStorage.getItem("usuario");
