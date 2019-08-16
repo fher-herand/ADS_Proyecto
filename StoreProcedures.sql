@@ -27,3 +27,48 @@ update entrega
 set nota=@nota
 where id_entrega=@entrega;
 insert into notificacion values('Te han calificado '+@nombreTarea,'Tu nota obtenida es '+@nota,GETDATE(),@alumno,@actividad)
+
+
+	
+Create Procedure InsertarMaestro(@nombre varchar(70),@telefono integer,@direccion varchar(150),@email varchar(45),@fecha_nac date,@pass varchar(20),@dpi bigint)
+as 
+Insert into Maestro values(@nombre,@telefono,@direccion,@email,@fecha_nac,@pass,@dpi);
+
+
+
+Create Procedure InsertarAlumno(@nombre varchar(70),@telefono integer,@telefonoTutor integer,@direccion varchar(150),@email varchar(45),@fecha_nac date,@pass varchar(20),@part varchar(45))
+as 
+Insert into Alumno values(@nombre,@telefono,@telefonoTutor,@direccion,@email,@fecha_nac,@part,@pass,NULL);
+
+
+
+Create Procedure crearMateria(@nombre varchar(70))
+as
+insert into Materia values (@nombre)
+
+
+
+Create Procedure crearCarrera(@nombre varchar(70))
+as
+insert into carrera values (@nombre)
+
+
+
+
+Create Procedure eliminarMaestro(@registro integer)
+as
+Delete from maestro
+where registro=@registro
+
+
+
+Create Procedure eliminarAlumno(@carnet integer)
+as
+Delete from alumno
+where carnet=@carnet
+
+
+Create Procedure getCarreras
+as
+Select * from carrera
+
